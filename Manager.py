@@ -1,3 +1,6 @@
+import pickle
+
+
 class Manager:
     def __init__(self, username,  password='', admin=False):
         self.admin = admin
@@ -10,15 +13,17 @@ class Manager:
     @staticmethod
     def match(password,c_password):
         if password == c_password:
-            print("User created successfully.")
-            return True    
-        print("Confirm password does not match.\nPlease try again...")
+            return True
+        print("Password does not match.\nPlease try again...")
         return False
 
-    def change_password(self,c_password):
-        if self.match(self.password, c_password):
-            self.password = c_password
-            return True
+    def change_password(self,password):
+        if self.match(self.password, password):
+            new_password = input("Enter the new Password:")
+            c_password = input("Enter the confirm Password:")
+            if self.match(new_password,c_password):
+                self.password = c_password
+                return True
         return False
     
     def __repr__(self):
